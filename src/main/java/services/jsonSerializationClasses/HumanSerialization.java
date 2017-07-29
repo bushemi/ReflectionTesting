@@ -1,6 +1,6 @@
 package services.jsonSerializationClasses;
 
-import com.google.gson.*;
+import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
@@ -9,8 +9,6 @@ import services.AnnotationService;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -30,9 +28,9 @@ public class HumanSerialization extends TypeAdapter<Human> {
         service = new AnnotationService();
     }
 private void init(Human human){
-    namesList = service.getNamesList();
+//    namesList = service.getNamesList();
 
-    String dateFormatPattern =service.getLocalDateFormatPattern();
+    String dateFormatPattern = null;//service.getLocalDateFormatPattern();
     formatter = DateTimeFormatter.ofPattern(dateFormatPattern);
 }
 

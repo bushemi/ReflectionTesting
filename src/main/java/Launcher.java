@@ -1,38 +1,34 @@
+import dto.Animal;
 import dto.Human;
-import services.AnnotationService;
 import services.JsonService;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDate;
 import java.time.Month;
-import java.util.List;
 
 public class Launcher {
 
     public static void main(String[] args) throws InvocationTargetException, IllegalAccessException {
-Human human = new Human("admin","rootovski","ski",
-        LocalDate.of(1956, Month.DECEMBER,30));
+        Human human = new Human(null, "rootovski", "ski",
+                LocalDate.of(1956, Month.DECEMBER,30));
+        Animal animal = new Animal(15, "barsik");
+//        AnnotationService annotationService =
+//                new AnnotationService();
+//annotationService.parseFieldValuesToJson(human);
+        jsonTesting(human);
+        jsonTesting(animal);
+//        System.out.println(human);
 
-        AnnotationService annotationService =
-                new AnnotationService();
-        annotationService.getListOfMethods(human);
-//        List<Field> annotationsList = annotationService.getListOfAnnotations(human);
-//annotationsList.forEach(annotationService::getNames);
-
-        System.out.println(human);
     }
 
 
+    public static void jsonTesting(Object human) {
 
-
-    public static void jsonTesting(Human human) {
-
-JsonService jsonService = JsonService.getInstance();
+        JsonService jsonService = JsonService.getInstance();
         System.out.println(human);
-    String s = jsonService.toJson(human);
+        String s = JsonService.toJson(human);
         System.out.println(s);
-        human = jsonService.fromJson(s);
+//        human = jsonService.fromJson(s);
         System.out.println(human.toString());
     }
 }

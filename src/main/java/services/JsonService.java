@@ -2,32 +2,40 @@ package services;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import dto.Human;
-import services.jsonSerializationClasses.HumanSerialization;
+import services.jsonSerializationClasses.CustomSerializer;
 
 public class JsonService {
     private static JsonService ourInstance = new JsonService();
-    private Gson json ;
+
 
     public static JsonService getInstance() {
         return ourInstance;
     }
 
     private JsonService() {
-        GsonBuilder builder = new GsonBuilder()
-            .setPrettyPrinting()
-            .registerTypeAdapter(Human.class,new HumanSerialization("dd-MM-yyyy"));
 
-        json = builder.create();
     }
-    public String toJson(Object object){
+
+    private static <T> Gson init(Class<T> clazz) {
+        GsonBuilder builder = new GsonBuilder()
+                .setPrettyPrinting()
+                .registerTypeAdapter(clazz, new CustomSerializer());
+
+        return builder.create();
+    }
+
+    public static String toJson(Object object) {
+        Gson json = init(object.getClass());
         return new String(json.toJson(object));
     }
-    public Human fromJson(String jsonString){
 
-        Human human = json.fromJson(jsonString,Human.class);
+    public static <T> T fromJson(String jsonString, Class<T> clazz) {
+        Gson json = init(clazz);
 
-        return human;
+        T object;
+        object = json.fromJson(jsonString, clazz);
+
+        return object;
     }
 
 }
