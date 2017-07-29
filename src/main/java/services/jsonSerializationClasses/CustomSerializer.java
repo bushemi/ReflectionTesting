@@ -43,7 +43,11 @@ public class CustomSerializer<T> implements JsonSerializer<T>, JsonDeserializer<
         }
 
         namesList = annotationService.parseFieldNamesToJson(clazz);
-        namesList.forEach((e) -> map.put(e, json.getAsJsonObject().get(e).getAsString()));
+
+        namesList.forEach((e) -> {
+                JsonElement jsonElement = json.getAsJsonObject().get(e);
+                map.put(e, jsonElement==null ? null: jsonElement.getAsString());
+            });
 
         T finalObject = object;
         namesList.forEach((e) -> {

@@ -18,7 +18,7 @@ public class Launcher {
 
         Animal animal = new Animal(15, "barsik");
 
-        UserProfile user = new UserProfile(149, "admin", "12345", "bigboss8@mail.ru");
+        UserProfile user = new UserProfile(149, null, "12345", "bigboss8@mail.ru");
         jsonTesting(human);
         jsonTesting(animal);
         jsonTesting(user);
