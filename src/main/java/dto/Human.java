@@ -20,6 +20,9 @@ public class Human {
         this.birthDate = birthDate;
     }
 
+    public Human() {
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -45,11 +48,8 @@ public class Human {
     }
 
     public LocalDate getBirthDate() {
-
         return birthDate;
     }
-
-
 
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
